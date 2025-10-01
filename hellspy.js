@@ -155,8 +155,7 @@ export default (req, res) => {
     return serveHTTP(builder.getInterface())(req, res);}
 
 console.log("test rqeuest");
-url = `https://api.hellspy.to/gw/search?query=${query.replaceAll(" ", "%20")}&offset=0&limit=99`
-// url = `https://api.hellspy.to/gw/search?query=problem child 2&offset=0&limit=99`
+url = `https://api.hellspy.to/gw/search?query=problem child 2&offset=0&limit=99`
 // const response = await axios.get(url, {
 // 	  headers: {
 // 		"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0",
@@ -172,6 +171,7 @@ url = `https://api.hellspy.to/gw/search?query=${query.replaceAll(" ", "%20")}&of
 // else
 // 	console.log(responseerror , response.status)
 // 	console.log("test rqeuest false")
+
 
 
 

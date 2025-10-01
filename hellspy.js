@@ -1,4 +1,4 @@
-const { addonBuilder, serveHTTP, publishToCentral }  = require('stremio-addon-sdk')
+//const { addonBuilder, serveHTTP, publishToCentral }  = require('stremio-addon-sdk')
 const axios = require("axios")
 const { getRouter } = require("stremio-addon-sdk");
 
@@ -148,5 +148,6 @@ const router = getRouter(addonInterface);
 
 // Export pre Vercel
 module.exports = router;
+
 
 

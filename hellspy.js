@@ -141,14 +141,15 @@ async function search(query, video_details = false)
     return files
 }
 
-// export pre Vercel
 const addonInterface = builder.getInterface();
 
 module.exports = (req, res) => {
+    // CORS pre Stremio
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
+    // OPTIONS request = preflight, ukonči hneď
     if (req.method === "OPTIONS") {
         res.statusCode = 200;
         res.end();
@@ -156,10 +157,15 @@ module.exports = (req, res) => {
     }
 
     if (req.url === "/manifest.json") {
-        res.setHeader("Content-Type", "application/json");
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json; charset=utf-8");
         res.end(JSON.stringify(addonInterface.manifest));
     }
-    else if (req.url.startsWith("/catalog") || req.url.startsWith("/stream") || req.url.startsWith("/meta")) {
+    else if (
+        req.url.startsWith("/catalog") ||
+        req.url.startsWith("/stream") ||
+        req.url.startsWith("/meta")
+    ) {
         return addonInterface.get(req, res);
     }
     else {
@@ -167,6 +173,8 @@ module.exports = (req, res) => {
         res.end("Not found");
     }
 };
+
+
 
 
 

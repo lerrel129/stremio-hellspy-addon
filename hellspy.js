@@ -104,7 +104,7 @@ builder.defineMetaHandler(function(args) {
 
 async function search(query, video_details = false)
 {
-    console.log("query: ", query)
+    //console.log("query: ", query)
     url = `https://api.hellspy.to/gw/search?query=${query.replaceAll(" ", "%20")}&offset=0&limit=99`
     const response = await axios.get(url, {
 		  headers: {
@@ -117,6 +117,8 @@ async function search(query, video_details = false)
 	{
 		videos = response.data.items
 	}
+	else
+		console.log(responseerror , response.status)
 
     const start = Date.now()
     let files = []
@@ -150,6 +152,7 @@ async function search(query, video_details = false)
 const port = process.env.PORT || 3000;
 serveHTTP(builder.getInterface(), { port });
 console.log("Hellspy addon running on port " + port);
+
 
 
 

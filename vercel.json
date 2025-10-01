@@ -4,7 +4,8 @@
     { "src": "hellspy.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/.*", "dest": "hellspy.js" }
+    { "src": "/.*", "dest": "/hellspy.js" }
   ]
 }
+
 

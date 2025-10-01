@@ -1,5 +1,5 @@
-const { addonBuilder, serveHTTP } = require("stremio-addon-sdk");
-const axios = require("axios");
+import { addonBuilder, serveHTTP } from "stremio-addon-sdk";
+import axios from "axios";
 
 const builder = new addonBuilder({
     id: 'Hellspy',
@@ -152,6 +152,9 @@ async function search(query, video_details = false)
 
 const port = process.env.PORT || 3000;
 serveHTTP(builder.getInterface(), { port });
+
+//export default (req, res) => {
+//    return serveHTTP(builder.getInterface())(req, res);
 //console.log("Hellspy addon running on port " + port);
 console.log("test rqeuest");
 
@@ -171,6 +174,7 @@ if (response.status == 200)
 else
 	console.log(responseerror , response.status)
 	console.log("test rqeuest false")
+
 
 
 

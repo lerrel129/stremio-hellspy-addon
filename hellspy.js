@@ -141,6 +141,15 @@ async function search(query, video_details = false)
     return files
 }
 
-module.exports = (req, res) => {
-    return serveHTTP(builder.getInterface())(req, res);
-}
+const { getRouter } = require("stremio-addon-sdk");
+
+// ...
+// všetky tvoje handlery vyššie
+
+// Vytvor router
+const addonInterface = builder.getInterface();
+const router = getRouter(addonInterface);
+
+// Export pre Vercel
+module.exports = router;
+

@@ -106,11 +106,17 @@ async function search(query, video_details = false)
 {
     console.log("query: ", query)
     url = `https://api.hellspy.to/gw/search?query=${query.replaceAll(" ", "%20")}&offset=0&limit=99`
-    response = await axios.get(url)
-            if (response.status == 200)
-            {
-                videos = response.data.items
-            }
+    const response = await axios.get(url, {
+		  headers: {
+		    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0",
+		    "Accept": "application/json, text/plain, */*",
+		    "Referer": "https://www.hellspy.to/"
+		  }
+		});
+	if (response.status == 200)
+	{
+		videos = response.data.items
+	}
 
     const start = Date.now()
     let files = []
@@ -144,6 +150,7 @@ async function search(query, video_details = false)
 const port = process.env.PORT || 3000;
 serveHTTP(builder.getInterface(), { port });
 console.log("Hellspy addon running on port " + port);
+
 
 
 

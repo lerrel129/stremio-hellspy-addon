@@ -1,4 +1,4 @@
-const { addonBuilder, getRouter } = require("stremio-addon-sdk");
+const { addonBuilder } = require("stremio-addon-sdk");
 const axios = require("axios");
 
 const builder = new addonBuilder({
@@ -154,6 +154,7 @@ module.exports = (req, res) => {
         return addonInterface.get(req, res);
     }
 };
+
 
 
 

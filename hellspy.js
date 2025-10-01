@@ -141,11 +141,20 @@ async function search(query, video_details = false)
     return files
 }
 
-const addonInterface = builder.getInterface()
-const router = getRouter(addonInterface)
+// export pre Vercel
+const addonInterface = builder.getInterface();
+
 module.exports = (req, res) => {
-    return router(req, res)
-}
+    // ak klient pýta manifest
+    if (req.url === "/manifest.json") {
+        res.setHeader("Content-Type", "application/json");
+        res.end(JSON.stringify(addonInterface.manifest));
+    } else {
+        // ostatné endpointy (catalog, stream, meta)
+        return addonInterface.get(req, res);
+    }
+};
+
 
 
 

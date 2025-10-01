@@ -145,15 +145,20 @@ async function search(query, video_details = false)
 const addonInterface = builder.getInterface();
 
 module.exports = (req, res) => {
-    // ak klient pýta manifest
     if (req.url === "/manifest.json") {
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(addonInterface.manifest));
-    } else {
-        // ostatné endpointy (catalog, stream, meta)
+    }
+    else if (req.url.startsWith("/catalog") || req.url.startsWith("/stream") || req.url.startsWith("/meta")) {
         return addonInterface.get(req, res);
     }
-};
+    else {
+        // všetko ostatné (/, /favicon.ico, /favicon.png, …)
+        res.statusCode = 404;
+        res.end("Not found");
+    }
+}
+
 
 
 

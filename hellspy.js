@@ -143,9 +143,6 @@ async function search(query, video_details = false)
 
 // Najskôr login, potom spustenie servera
 async function init() {
-    const server = serveHTTP(builder.getInterface(), { port: process.env.PORT || 7001 })
+    module.exports = app; // Vercel si „app“ sám pripojí ako serverless handler
 }
 init()
-
-//serveHTTP(builder.getInterface(), { port: process.env.PORT || 7000 })
-//publishToCentral("https://your-domain/manifest.json") // <- invoke this if you want to publish your addon and it's accessible publically on "your-domain"

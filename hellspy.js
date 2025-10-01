@@ -143,11 +143,16 @@ async function search(query, video_details = false)
 }
 
 // Vytvor router
-const addonInterface = builder.getInterface();
-const router = getRouter(addonInterface);
+const { getRouter } = require("stremio-addon-sdk")
+const addonInterface = builder.getInterface()
+// vytvor router handler
+const router = getRouter(addonInterface)
+// export pre Vercel
+module.exports = (req, res) => {
+    return router(req, res)
+}
 
-// Export pre Vercel
-module.exports = router;
+
 
 
 

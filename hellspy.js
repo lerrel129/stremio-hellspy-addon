@@ -1,4 +1,4 @@
-const { addonBuilder } = require("stremio-addon-sdk");
+const { addonBuilder, serveHTTP } = require("stremio-addon-sdk");
 const axios = require("axios");
 
 const builder = new addonBuilder({
@@ -141,38 +141,10 @@ async function search(query, video_details = false)
     return files
 }
 
-const addonInterface = builder.getInterface();
+const port = process.env.PORT || 3000;
+serveHTTP(builder.getInterface(), { port });
+console.log("Hellspy addon running on port " + port);
 
-module.exports = (req, res) => {
-    // CORS pre Stremio
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-    // OPTIONS request = preflight, ukonči hneď
-    if (req.method === "OPTIONS") {
-        res.statusCode = 200;
-        res.end();
-        return;
-    }
-
-    if (req.url === "/manifest.json") {
-        res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json; charset=utf-8");
-        res.end(JSON.stringify(addonInterface.manifest));
-    }
-    else if (
-        req.url.startsWith("/catalog") ||
-        req.url.startsWith("/stream") ||
-        req.url.startsWith("/meta")
-    ) {
-        return addonInterface.get(req, res);
-    }
-    else {
-        res.statusCode = 404;
-        res.end("Not found");
-    }
-};
 
 
 

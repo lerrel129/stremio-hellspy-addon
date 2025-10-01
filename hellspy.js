@@ -1,4 +1,5 @@
-import { addonBuilder, serveHTTP } from "stremio-addon-sdk";
+import pkg from "stremio-addon-sdk";
+const { addonBuilder, serveHTTP } = pkg;
 import axios from "axios";
 
 const builder = new addonBuilder({
@@ -150,14 +151,10 @@ async function search(query, video_details = false)
     return files
 }
 
-const port = process.env.PORT || 3000;
-serveHTTP(builder.getInterface(), { port });
+export default (req, res) => {
+    return serveHTTP(builder.getInterface())(req, res);
 
-//export default (req, res) => {
-//    return serveHTTP(builder.getInterface())(req, res);
-//console.log("Hellspy addon running on port " + port);
 console.log("test rqeuest");
-
 url = `https://api.hellspy.to/gw/search?query=problem child 2&offset=0&limit=99`
 const response = await axios.get(url, {
 	  headers: {
@@ -174,6 +171,7 @@ if (response.status == 200)
 else
 	console.log(responseerror , response.status)
 	console.log("test rqeuest false")
+
 
 
 

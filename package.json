@@ -1,0 +1,12 @@
+{
+  "name": "stremio-hellspy-addon",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "hellspy.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "stremio-addon-sdk": "^1.6.6"
+  }
+}

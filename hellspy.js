@@ -1,6 +1,5 @@
 const { addonBuilder, getRouter } = require("stremio-addon-sdk");
 const axios = require("axios");
-//const { getRouter } = require("stremio-addon-sdk");
 
 const builder = new addonBuilder({
     id: 'Hellspy',
@@ -142,15 +141,12 @@ async function search(query, video_details = false)
     return files
 }
 
-// Vytvor router
-const { getRouter } = require("stremio-addon-sdk")
 const addonInterface = builder.getInterface()
-// vytvor router handler
 const router = getRouter(addonInterface)
-// export pre Vercel
 module.exports = (req, res) => {
     return router(req, res)
 }
+
 
 
 

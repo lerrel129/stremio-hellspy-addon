@@ -1,6 +1,6 @@
 const { addonBuilder, getRouter } = require("stremio-addon-sdk");
 const axios = require("axios");
-const { getRouter } = require("stremio-addon-sdk");
+//const { getRouter } = require("stremio-addon-sdk");
 
 const builder = new addonBuilder({
     id: 'Hellspy',
@@ -148,6 +148,7 @@ const router = getRouter(addonInterface);
 
 // Export pre Vercel
 module.exports = router;
+
 
 
 

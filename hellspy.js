@@ -141,8 +141,6 @@ async function search(query, video_details = false)
     return files
 }
 
-// Najskôr login, potom spustenie servera
-async function init() {
-    module.exports = app; // Vercel si „app“ sám pripojí ako serverless handler
+module.exports = (req, res) => {
+    return serveHTTP(builder.getInterface())(req, res);
 }
-init()

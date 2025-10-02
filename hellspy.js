@@ -27,7 +27,7 @@ const builder = new addonBuilder({
 
 // takes function(args)
 builder.defineStreamHandler(async function(args) {
-    //console.log("!!!!!defineStreamHandler: ", args)
+    console.log("!!!!!defineStreamHandler: ", args)
     let streams = []
     if(args.id.startsWith("tt"))
     {
@@ -65,6 +65,7 @@ builder.defineCatalogHandler(async function(args) {
     //console.log("files", files) 
 
     //console.log("POSTER", files[0].thumbnail) 
+	console.log("defineCatalogHandler: ", args)
     const metas = files.map(f => ({
         id: `hellspy:${f.d_link};${f.name};${f.thumbnail};${f.audio?.audio_stopy? `🔊`+f.audio.audio_stopy.replaceAll(",", "|"): ""};${f.video?.titulky? `💬`+f.video.titulky.replaceAll(",", "|"): ""}`,
         name: f.name,
@@ -105,7 +106,7 @@ builder.defineMetaHandler(function(args) {
 
 async function search(query, video_details = false)
 {
-    console.log("query: ", query)
+    console.log("search_query: ", query)
     url = `https://api.hellspy.to/gw/search?query=${query.replaceAll(" ", "%20")}&offset=0&limit=99`
 	
     const response = await axios.get(url, {
@@ -154,7 +155,7 @@ async function search(query, video_details = false)
 export default (req, res) => {
     return serveHTTP(builder.getInterface())(req, res);}
 
-console.log("test rqeuest");
+console.log("test reqeuest");
 const url = `https://api.hellspy.to/gw/search?query=problem child 2&offset=0&limit=99`
 // const response = await axios.get(url, {
 // 	  headers: {
@@ -171,6 +172,7 @@ const url = `https://api.hellspy.to/gw/search?query=problem child 2&offset=0&lim
 // else
 // 	console.log(responseerror , response.status)
 // 	console.log("test rqeuest false")
+
 
 
 
